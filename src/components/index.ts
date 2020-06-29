@@ -1,4 +1,3 @@
-import genderRoutes from './gender/routes';
-import healthRoutes from './healthcheck/routes';
+import organizationsRoutes from './organizations/routes';
 
-export default [...genderRoutes, ...healthRoutes];
+export default [...organizationsRoutes];

@@ -1,8 +1,8 @@
 export enum ErrorCode {
-  NotFound = 'gender.not.found',
-  BadRequest = 'gender.bad.request',
-  InternalServerError = 'gender.internal.server.error',
-  Unauthorized = 'gender.unauthorized',
+  NotFound = 'organizations.not.found',
+  BadRequest = 'organizations.bad.request',
+  InternalServerError = 'organizations.internal.server.error',
+  Unauthorized = 'organizations.unauthorized',
 }
 
 export enum ErrorDescription {

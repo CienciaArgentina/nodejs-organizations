@@ -5,4 +5,4 @@ export enum Environment {
   Production = 'production',
 }
 
-export const serviceName = 'gender-api';
+export const serviceName = 'organizations-api';
