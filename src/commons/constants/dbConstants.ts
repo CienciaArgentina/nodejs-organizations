@@ -1,3 +1,4 @@
 export enum TableNames {
-  Organization = 'Organizations',
+  Organization = 'organizations',
+  Address = 'addresses',
 }
