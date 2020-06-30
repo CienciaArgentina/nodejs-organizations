@@ -6,17 +6,16 @@ export default class Organizations extends Model {
     
   static tableName = TableNames.Organization;
 
-  static get relationMappings() {
+  static relationMappings = () => ({
+    addresses: {
+      relation: Model.HasOneRelation,
+      // The related model.
+      modelClass: Addresses,
 
-    return {
-      addresses: {
-        relation: Model.HasOneRelation,
-        modelClass: Addresses,
-        join: {
-          from: 'organizations.addressid',
-          to: 'addresses.id'
-        }
+      join: {
+        from: 'organizations.AddressId',
+        to: 'addresses.Id'
       }
-    };
-  }
+    }
+  })
 }

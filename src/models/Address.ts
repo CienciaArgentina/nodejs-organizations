@@ -6,22 +6,17 @@ export default class Addresses extends Model {
     
   static tableName = TableNames.Address;
 
-  static get relationMappings() {
+  static relationMappings = () => ({
+    addresses: {
+      relation: Model.BelongsToOneRelation,
+      // The related model.
+      modelClass: Organizations,
 
-    return {
-      owner: {
-        relation: Model.BelongsToOneRelation,
-
-        // The related model. This can be either a Model subclass constructor or an
-        // absolute file path to a module that exports one.
-        modelClass: Organizations,
-
-        join: {
-          from: 'addresses.id',
-          to: 'organizations.addressid',
-        }
+      join: {
+        from: 'addresses.id',
+        to: 'organizations.addressid'
       }
     }
-  }
+  })
 
 }
