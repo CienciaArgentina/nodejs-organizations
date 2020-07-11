@@ -1,4 +1,5 @@
 import Organizations from '../../models/Organizations';
+import Departments from '../../models/Departments';
 
 export const findOrganizationsById = async (id: string): Promise<Organizations | undefined> => {
   // return await Organizations.query().
@@ -11,3 +12,12 @@ export const findOrganizationsById = async (id: string): Promise<Organizations |
   findById(id);
 
 };
+
+export const findDepartmentById = async (id: string): Promise<Departments | undefined> => {
+
+  return await Departments.query().
+  modify('defaultSelects').
+  findById(id);
+
+};
+

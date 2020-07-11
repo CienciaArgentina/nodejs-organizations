@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getById,getOrganizations } from './service';
+import { getById,getOrganizations,getDepartmentById } from './service';
 import { HttpStatusCode } from '../../commons/constants';
 
 export default [
@@ -22,6 +22,16 @@ export default [
         res.status(HttpStatusCode.Ok).send(result);
       },
     ],
+  },
+  {
+    path: '/departments/:id',
+    method: 'get',
+    handler: [
+      async (req: Request, res: Response): Promise<void> => {
+        const result = await getDepartmentById(req.params.id);
+        res.status(HttpStatusCode.Ok).send(result);
+      }
+    ]
   },
   {
     path: '/ping',
