@@ -7,7 +7,14 @@ export default class Departments extends Model {
 
   static modifiers = {
     defaultSelects(query:any) {
-      query.select('id', 'name', 'description', 'link', 'department_head')
+      const { ref } = Departments
+      query.select(
+        ref('id'),
+        ref('name'),
+        ref('description'),
+        ref('link'),
+        ref('department_head')
+      )
     }
   }
 

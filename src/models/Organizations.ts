@@ -10,7 +10,8 @@ export default class Organizations extends Model {
 
   static modifiers = {
     defaultSelects(query: any) {
-      query.select('id', 'name', 'acronym', 'summary', 'description', 'website')
+      const { ref } = Organizations
+      query.select(ref('id'), ref('name'), ref('acronym'), ref('summary'), ref('description'), ref('website'))
     },
     populateModel(query: any) {
       query.withGraphJoined('address').

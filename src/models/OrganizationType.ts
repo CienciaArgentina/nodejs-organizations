@@ -7,7 +7,12 @@ export default class Addresses extends Model {
 
   static modifiers = {
     defaultSelects(query:any) {
-      query.select('id', 'description', 'pay_platform')
+      const { ref } = Addresses;
+      query.select(
+        ref('id'),
+        ref('description'),
+        ref('pay_platform')
+      )
     }
   }
 
