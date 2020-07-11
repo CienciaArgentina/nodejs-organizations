@@ -1,21 +1,49 @@
 import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
 import Addresses from './Address';
+import OrganizationType from './OrganizationType'
+import Departments from './Departments';
 
 export default class Organizations extends Model {
     
   static tableName = TableNames.Organization;
 
-  static relationMappings = () => ({
-    addresses: {
-      relation: Model.HasOneRelation,
-      // The related model.
-      modelClass: Addresses,
-
-      join: {
-        from: 'organizations.AddressId',
-        to: 'addresses.Id'
-      }
+  static modifiers = {
+    defaultSelects(query: any) {
+      query.select('id', 'name', 'acronym', 'summary', 'description', 'website')
+    },
+    populateModel(query: any) {
+      query.withGraphJoined('address').
+      withGraphJoined('organization_type(defaultSelects)').
+      withGraphFetched('departments(defaultSelects)')
     }
+  }
+
+  static relationMappings = () => ({
+    organization_type: {
+      relation: Model.HasOneRelation,
+      modelClass: OrganizationType,
+      join: {
+        from: 'organization.organization_type_id',
+        to: 'organization_type.id'
+      }
+
+    },
+    address: {
+      relation: Model.HasOneRelation,
+      modelClass: Addresses,
+      join: {
+        from: 'organization.address_id',
+        to: 'address.Id'
+      }
+    },
+    departments: {
+      relation: Model.HasManyRelation,
+      modelClass: Departments,
+      join: {
+        from: 'organization.id',
+        to: 'department.organization_id'
+      }
+    },
   })
 }
