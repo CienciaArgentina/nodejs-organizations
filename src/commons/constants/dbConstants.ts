@@ -1,4 +1,6 @@
 export enum TableNames {
-  Organization = 'organizations',
-  Address = 'addresses',
+  Organization = 'organization',
+  OrganizationType = 'organization_type',
+  Address = 'address',
+  Departments = 'department'
 }
