@@ -17,6 +17,7 @@ export const findDepartmentById = async (id: string): Promise<Departments | unde
 
   return await Departments.query().
   modify('defaultSelects').
+  modify('populateModel').
   findById(id);
 
 };

@@ -2,7 +2,6 @@ import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
 import Addresses from './Address';
 import OrganizationType from './OrganizationType'
-import Departments from './Departments';
 
 export default class Organizations extends Model {
     
@@ -28,7 +27,6 @@ export default class Organizations extends Model {
         from: 'organization.organization_type_id',
         to: 'organization_type.id'
       }
-
     },
     address: {
       relation: Model.HasOneRelation,
@@ -40,7 +38,7 @@ export default class Organizations extends Model {
     },
     departments: {
       relation: Model.HasManyRelation,
-      modelClass: Departments,
+      modelClass: require('./Departments').default,
       join: {
         from: 'organization.id',
         to: 'department.organization_id'
