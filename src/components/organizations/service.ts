@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from 'util';
 import { HTTP404Error } from '@cienciaargentina/nodejs-backend-commons';
-import { findOrganizationsById, findDepartmentById } from './repository';
+import { findOrganizationsById, findDepartmentById, saveOrganization } from './repository';
 import Organizations from '../../models/Organizations';
 import Departments from '../../models/Departments';
 
@@ -23,4 +23,11 @@ export const getDepartmentById = async (id: string): Promise<Departments> => {
   if (isNullOrUndefined(department)) throw new HTTP404Error();
 
   return department;
+};
+
+export const createOrganization = async (organization: Object): Promise<Number> => {
+  console.log(organization);
+
+  const id = await saveOrganization(organization);
+  return id;
 };

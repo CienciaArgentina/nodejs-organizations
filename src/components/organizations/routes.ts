@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getById,getOrganizations,getDepartmentById } from './service';
+import { getById,getOrganizations,getDepartmentById,createOrganization } from './service';
 import { HttpStatusCode } from '../../commons/constants';
 
 export default [
@@ -19,6 +19,17 @@ export default [
     handler: [
       async (req: Request, res: Response): Promise<void> => {
         const result = await getOrganizations(req.params.id);
+        res.status(HttpStatusCode.Ok).send(result);
+      },
+    ],
+  },
+  {
+    path: '/organizations',
+    method: 'post',
+    handler: [
+      async ( req: Request, res: Response): Promise<void> => {
+        console.log(req);
+        const result = await createOrganization(req.body);
         res.status(HttpStatusCode.Ok).send(result);
       },
     ],

@@ -22,3 +22,13 @@ export const findDepartmentById = async (id: string): Promise<Departments | unde
 
 };
 
+export const saveOrganization = async (organization: Object): Promise<Number> => {
+
+  console.log(organization);
+  
+
+  const graph = await Organizations.query()
+  .insert(organization)
+  return 1
+
+};

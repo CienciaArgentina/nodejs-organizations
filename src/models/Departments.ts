@@ -21,7 +21,7 @@ export default class Departments extends Model {
     },
     populateModel(query:any) {
       query
-      .withGraphJoined('organization')
+      .withGraphJoined('organization(defaultSelects)')
       .withGraphFetched('projects(defaultSelects)')
     }
   }

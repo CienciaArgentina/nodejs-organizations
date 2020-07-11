@@ -7,6 +7,18 @@ export default class Organizations extends Model {
     
   static tableName = TableNames.Organization;
 
+  // static get jsonSchema() {
+  //   return {
+  //     type: 'object',
+  //     required: ['name'],
+  //     properties: {
+  //       id: { type:'integer' },
+  //       name: { type:'string' },
+  //     }
+  //   }
+  // }
+  // id, name, acronym, summary, description, website
+
   static modifiers = {
     defaultSelects(query: any) {
       const { ref } = Organizations
