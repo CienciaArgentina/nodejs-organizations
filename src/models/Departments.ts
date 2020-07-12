@@ -1,16 +1,16 @@
 import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
-import Projects from './Projects';
+import  { Project }  from './';
 
 //TODO: cambiar clases y archivos a singular
 
-export default class Departments extends Model {
+export class Department extends Model {
 
   static tableName = TableNames.Departments;
 
   static modifiers = {
     defaultSelects(query:any) {
-      const { ref } = Departments
+      const { ref } = Department
       query.select(
         ref('id'),
         ref('name'),
@@ -29,7 +29,7 @@ export default class Departments extends Model {
   static relationMappings = {
     projects: {
       relation: Model.HasManyRelation,
-      modelClass: Projects,
+      modelClass: Project,
       join: {
         from: 'department.id',
         to: 'project.department_id'

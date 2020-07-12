@@ -1,9 +1,8 @@
 import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
-import Addresses from './Address';
-import OrganizationType from './OrganizationType'
+import { Address,OrganizationType } from './';
 
-export default class Organizations extends Model {
+export class Organization extends Model {
 
   id?:number
   acronym?:string
@@ -35,7 +34,7 @@ export default class Organizations extends Model {
 
   static modifiers = {
     defaultSelects(query: any) {
-      const { ref } = Organizations
+      const { ref } = Organization
       query.select(ref('id'), ref('name'), ref('acronym'), ref('summary'), ref('description'), ref('website'))
     },
     populateModel(query: any) {
@@ -56,7 +55,7 @@ export default class Organizations extends Model {
     },
     address: {
       relation: Model.HasOneRelation,
-      modelClass: Addresses,
+      modelClass: Address,
       join: {
         from: 'organization.address_id',
         to: 'address.Id'

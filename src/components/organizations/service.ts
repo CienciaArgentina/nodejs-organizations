@@ -4,53 +4,37 @@ import {
   findOrganizationsById,
   findDepartmentById,
   saveOrganization,
-  setActiveOrganization,
   updateOrganization
 } from './repository';
-import Organizations from '../../models/Organizations';
-import Departments from '../../models/Departments';
-import OrganizationsDTO from '../../models/OrganizationDTO'
+import { Organization,Department } from '../../models';
+import {OrganizationsDTO} from './utils';
+import { mapperFromOrganizationDTO } from './utils/mapper';
 
 interface OrganizationCreated {
   id: number;
 }
 
-export const getById = async (id: string): Promise<Organizations> => {
+export const getById = async (id: string): Promise<Organization> => {
   const organizations = await findOrganizationsById(id);
   if (isNullOrUndefined(organizations)) throw new HTTP404Error();
 
   return organizations;
 };
 
-export const getOrganizations = async (id: string): Promise<Organizations> => {
+//TODO
+export const getOrganizations = async (id: string): Promise<Organization> => {
   const organizations = await findOrganizationsById(id);
   if (isNullOrUndefined(organizations)) throw new HTTP404Error();
 
   return organizations;
 };
 
-export const getDepartmentById = async (id: string): Promise<Departments> => {
+export const getDepartmentById = async (id: string): Promise<Department> => {
   const department = await findDepartmentById(id);
   if (isNullOrUndefined(department)) throw new HTTP404Error();
 
   return department;
 };
-
-const mapperFromOrganizationDTO = ( {
-  acronym,
-  name,
-  summary,
-  description,
-  website
-}:OrganizationsDTO ): Organizations => {
-  let organization: Organizations = new Organizations()
-  organization.acronym = acronym
-  organization.name = name
-  organization.summary = summary
-  organization.description = description
-  organization.website = website
-  return organization
-}
 
 export const createOrganization = async (organizationDTO: OrganizationsDTO): Promise<OrganizationCreated> => {
   const organization = mapperFromOrganizationDTO(organizationDTO)
@@ -61,12 +45,7 @@ export const createOrganization = async (organizationDTO: OrganizationsDTO): Pro
   return response;
 };
 
-export const activateOrganization = async (id: string, organization: Organizations ): Promise<Boolean> => {
-  // await setActiveOrganization(id, organization);
-  return true;
-};
-
-export const patchOrgnization = async (id: string, organization: Organizations ): Promise<Boolean> => {
+export const patchOrgnization = async (id: string, organization: Organization ): Promise<Boolean> => {
   await updateOrganization(id, organization);
   return true;
 };

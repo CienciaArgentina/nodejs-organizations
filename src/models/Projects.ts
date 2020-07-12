@@ -1,13 +1,13 @@
 import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
 
-export default class Projects extends Model {
+export class Project extends Model {
     
   static tableName = TableNames.Projects;
 
   static modifiers = {
     defaultSelects(query:any) {
-      const { ref } = Projects
+      const { ref } = Project
       query.select(
         ref('id'),
         ref('name'),

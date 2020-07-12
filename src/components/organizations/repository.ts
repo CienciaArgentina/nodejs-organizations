@@ -1,47 +1,32 @@
-import Organizations from '../../models/Organizations';
-import Departments from '../../models/Departments';
-import Objection from 'objection';
-import OrganizationsDTO from '../../models/OrganizationDTO'
+import {Organization, Department} from '../../models';
 
-export const findOrganizationsById = async (id: string): Promise<Organizations | undefined> => {
-  // return await Organizations.query().
-  // select('organizations.*','addresses.*').
-  // join('addresses', 'organizations.addressid', '=', 'addresses.id').findById(id);
+export const findOrganizationsById = async (id: string): Promise<Organization | undefined> => {
 
-  return await Organizations.query().
+  return await Organization.query().
   modify('defaultSelects').
   modify('populateModel').
   findById(id);
 
 };
 
-export const findDepartmentById = async (id: string): Promise<Departments | undefined> => {
+export const findDepartmentById = async (id: string): Promise<Department | undefined> => {
 
-  return await Departments.query().
+  return await Department.query().
   modify('defaultSelects').
   modify('populateModel').
   findById(id);
 
 };
 
-export const saveOrganization = async (organization: Organizations): Promise<number> => {
-  const graph = await Organizations.query()
+export const saveOrganization = async (organization: Organization): Promise<number> => {
+  const graph = await Organization.query()
   .insert(organization)
   return graph.$id()
 
 };
 
-export const setActiveOrganization = async (id: string): Promise<boolean> => {
-  await Organizations
-  .query()
-  .patch({is_active: true})
-  .where('id', id)
-  return true
-
-};
-
-export const updateOrganization = async (id: string, organization: Organizations): Promise<boolean> => {
-  await Organizations
+export const updateOrganization = async (id: string, organization: Organization): Promise<boolean> => {
+  await Organization
   .query()
   .patch(organization)
   .where('id', id)
