@@ -1,6 +1,7 @@
 import Organizations from '../../models/Organizations';
 import Departments from '../../models/Departments';
 import Objection from 'objection';
+import OrganizationsDTO from '../../models/OrganizationDTO'
 
 export const findOrganizationsById = async (id: string): Promise<Organizations | undefined> => {
   // return await Organizations.query().
@@ -30,11 +31,10 @@ export const saveOrganization = async (organization: Organizations): Promise<num
 
 };
 
-export const setActiveOrganization = async (id: string, organization: Organizations): Promise<boolean> => {
-  console.log(organization);
+export const setActiveOrganization = async (id: string): Promise<boolean> => {
   await Organizations
   .query()
-  .patch(organization)
+  .patch({is_active: true})
   .where('id', id)
   return true
 

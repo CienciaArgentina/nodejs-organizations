@@ -4,6 +4,14 @@ import Addresses from './Address';
 import OrganizationType from './OrganizationType'
 
 export default class Organizations extends Model {
+
+  id?:number
+  acronym?:string
+  name!:string
+  summary?:string
+  description?:string
+  website?:string
+  is_active?:boolean
     
   static tableName = TableNames.Organization;
 
@@ -12,15 +20,14 @@ export default class Organizations extends Model {
       type: 'object',
       required: ['name'],
       properties: {
-        id: { type:'integer' },
+        id: { type:'integer', read_only:true },
         acronym: { type:['string', 'null'] },
         name: { type:'string' },
         summary: { type:['string', 'null'] },
-        description: { type:['string', 'null'] },
+        description: { type:['string', 'null'], minLength: 1, maxLength: 10 },
         website: { type:['string', 'null'] },
-        is_active: {type:['boolean', 'null']}
-      },
-      additionalProperties: true
+        is_active: { type:['boolean'] },
+      }
     }
   }
 

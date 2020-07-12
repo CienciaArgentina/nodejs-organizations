@@ -9,6 +9,7 @@ import {
 } from './repository';
 import Organizations from '../../models/Organizations';
 import Departments from '../../models/Departments';
+import OrganizationsDTO from '../../models/OrganizationDTO'
 
 interface OrganizationCreated {
   id: number;
@@ -35,7 +36,24 @@ export const getDepartmentById = async (id: string): Promise<Departments> => {
   return department;
 };
 
-export const createOrganization = async (organization: Organizations): Promise<OrganizationCreated> => {
+const mapperFromOrganizationDTO = ( {
+  acronym,
+  name,
+  summary,
+  description,
+  website
+}:OrganizationsDTO ): Organizations => {
+  let organization: Organizations = new Organizations()
+  organization.acronym = acronym
+  organization.name = name
+  organization.summary = summary
+  organization.description = description
+  organization.website = website
+  return organization
+}
+
+export const createOrganization = async (organizationDTO: OrganizationsDTO): Promise<OrganizationCreated> => {
+  const organization = mapperFromOrganizationDTO(organizationDTO)
   const id = await saveOrganization(organization);
   const response : OrganizationCreated = {
     id
@@ -44,7 +62,7 @@ export const createOrganization = async (organization: Organizations): Promise<O
 };
 
 export const activateOrganization = async (id: string, organization: Organizations ): Promise<Boolean> => {
-  await setActiveOrganization(id, organization);
+  // await setActiveOrganization(id, organization);
   return true;
 };
 
