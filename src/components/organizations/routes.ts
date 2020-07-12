@@ -7,8 +7,8 @@ export default [
     path: '/organizations/:id',
     method: 'get',
     handler: [
-      async (req: Request, res: Response): Promise<void> => {
-        const result = await getById(req.params.id);
+      async ({ params }: Request, res: Response): Promise<void> => {
+        const result = await getById(params.id);
         res.status(HttpStatusCode.Ok).send(result);
       },
     ],
@@ -17,8 +17,8 @@ export default [
     path: '/organizations',
     method: 'get',
     handler: [
-      async (req: Request, res: Response): Promise<void> => {
-        const result = await getOrganizations(req.params.id);
+      async ({ params }: Request, res: Response): Promise<void> => {
+        const result = await getOrganizations(params.id);
         res.status(HttpStatusCode.Ok).send(result);
       },
     ],
@@ -27,8 +27,8 @@ export default [
     path: '/organizations',
     method: 'post',
     handler: [
-      async ( req: Request, res: Response): Promise<void> => {
-        const result = await createOrganization(req.body);
+      async ( { body }: Request, res: Response): Promise<void> => {
+        const result = await createOrganization(body);
         res.status(HttpStatusCode.Created).send(result);
       },
     ],
@@ -37,8 +37,8 @@ export default [
     path: '/departments/:id',
     method: 'get',
     handler: [
-      async (req: Request, res: Response): Promise<void> => {
-        const result = await getDepartmentById(req.params.id);
+      async ({ params }: Request, res: Response): Promise<void> => {
+        const result = await getDepartmentById(params.id);
         res.status(HttpStatusCode.Ok).send(result);
       }
     ]
