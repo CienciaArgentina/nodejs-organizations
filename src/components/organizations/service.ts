@@ -4,6 +4,10 @@ import { findOrganizationsById, findDepartmentById, saveOrganization } from './r
 import Organizations from '../../models/Organizations';
 import Departments from '../../models/Departments';
 
+interface OrganizationCreated {
+  id: number;
+}
+
 export const getById = async (id: string): Promise<Organizations> => {
   const organizations = await findOrganizationsById(id);
   if (isNullOrUndefined(organizations)) throw new HTTP404Error();
@@ -25,9 +29,10 @@ export const getDepartmentById = async (id: string): Promise<Departments> => {
   return department;
 };
 
-export const createOrganization = async (organization: Object): Promise<Number> => {
-  console.log(organization);
-
+export const createOrganization = async (organization: Organizations): Promise<OrganizationCreated> => {
   const id = await saveOrganization(organization);
-  return id;
+  const response : OrganizationCreated = {
+    id
+  }
+  return response;
 };

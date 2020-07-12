@@ -28,9 +28,8 @@ export default [
     method: 'post',
     handler: [
       async ( req: Request, res: Response): Promise<void> => {
-        console.log(req);
         const result = await createOrganization(req.body);
-        res.status(HttpStatusCode.Ok).send(result);
+        res.status(HttpStatusCode.Created).send(result);
       },
     ],
   },

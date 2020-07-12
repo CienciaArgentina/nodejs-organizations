@@ -7,17 +7,20 @@ export default class Organizations extends Model {
     
   static tableName = TableNames.Organization;
 
-  // static get jsonSchema() {
-  //   return {
-  //     type: 'object',
-  //     required: ['name'],
-  //     properties: {
-  //       id: { type:'integer' },
-  //       name: { type:'string' },
-  //     }
-  //   }
-  // }
-  // id, name, acronym, summary, description, website
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: ['name'],
+      properties: {
+        id: { type:'integer' },
+        acronym: { type:['string', 'null'] },
+        name: { type:'string' },
+        summary: { type:['string', 'null'] },
+        description: { type:['string', 'null'] },
+        website: { type:['string', 'null'] }
+      }
+    }
+  }
 
   static modifiers = {
     defaultSelects(query: any) {
