@@ -29,3 +29,22 @@ export const saveOrganization = async (organization: Organizations): Promise<num
   return graph.$id()
 
 };
+
+export const setActiveOrganization = async (id: string, organization: Organizations): Promise<boolean> => {
+  console.log(organization);
+  await Organizations
+  .query()
+  .patch(organization)
+  .where('id', id)
+  return true
+
+};
+
+export const updateOrganization = async (id: string, organization: Organizations): Promise<boolean> => {
+  await Organizations
+  .query()
+  .patch(organization)
+  .where('id', id)
+  return true
+
+};

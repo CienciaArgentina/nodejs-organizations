@@ -1,5 +1,12 @@
 import { Request, Response } from 'express';
-import { getById,getOrganizations,getDepartmentById,createOrganization } from './service';
+import {
+  getById,
+  getOrganizations,
+  getDepartmentById,
+  createOrganization,
+  activateOrganization,
+  patchOrgnization
+} from './service';
 import { HttpStatusCode } from '../../commons/constants';
 
 export default [
@@ -29,6 +36,26 @@ export default [
     handler: [
       async ( { body }: Request, res: Response): Promise<void> => {
         const result = await createOrganization(body);
+        res.status(HttpStatusCode.Created).send(result);
+      },
+    ],
+  },
+  {
+    path: '/organizations/:id/set-active',
+    method: 'post',
+    handler: [
+      async ( req: Request, res: Response): Promise<void> => {
+        const result = await activateOrganization(req.params.id, req.body);
+        res.status(HttpStatusCode.Created).send(result);
+      },
+    ],
+  },
+  {
+    path: '/organizations/:id/',
+    method: 'patch',
+    handler: [
+      async ( req: Request, res: Response): Promise<void> => {
+        const result = await patchOrgnization(req.params.id, req.body);
         res.status(HttpStatusCode.Created).send(result);
       },
     ],

@@ -17,10 +17,14 @@ export default class Organizations extends Model {
         name: { type:'string' },
         summary: { type:['string', 'null'] },
         description: { type:['string', 'null'] },
-        website: { type:['string', 'null'] }
-      }
+        website: { type:['string', 'null'] },
+        is_active: {type:['boolean', 'null']}
+      },
+      additionalProperties: true
     }
   }
+
+  static is_active: Boolean
 
   static modifiers = {
     defaultSelects(query: any) {

@@ -1,6 +1,12 @@
 import { isNullOrUndefined } from 'util';
 import { HTTP404Error } from '@cienciaargentina/nodejs-backend-commons';
-import { findOrganizationsById, findDepartmentById, saveOrganization } from './repository';
+import {
+  findOrganizationsById,
+  findDepartmentById,
+  saveOrganization,
+  setActiveOrganization,
+  updateOrganization
+} from './repository';
 import Organizations from '../../models/Organizations';
 import Departments from '../../models/Departments';
 
@@ -35,4 +41,14 @@ export const createOrganization = async (organization: Organizations): Promise<O
     id
   }
   return response;
+};
+
+export const activateOrganization = async (id: string, organization: Organizations ): Promise<Boolean> => {
+  await setActiveOrganization(id, organization);
+  return true;
+};
+
+export const patchOrgnization = async (id: string, organization: Organizations ): Promise<Boolean> => {
+  await updateOrganization(id, organization);
+  return true;
 };
