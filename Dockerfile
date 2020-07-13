@@ -8,9 +8,7 @@ COPY ./src ./src
 
 #Login in github
 ARG github_PAT
-RUN echo $github_PAT > ~/TOKEN.txt
-RUN cat ~/TOKEN.txt
-RUN cat ~/TOKEN.txt | docker login https://docker.pkg.github.com -u gabmetal --password-stdin
+RUN docker login https://docker.pkg.github.com -u gabmetal --password $github_PAT
 
 RUN npm install
 RUN npm run build
