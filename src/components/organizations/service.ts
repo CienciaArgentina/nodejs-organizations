@@ -2,9 +2,10 @@ import { isNullOrUndefined } from 'util';
 import { HTTP404Error } from '@cienciaargentina/nodejs-backend-commons';
 import {
   findOrganizationsById,
+  findOrganizationsByUser,
   findDepartmentById,
   saveOrganization,
-  updateOrganization
+  updateOrganization,
 } from './repository';
 import { Organization,Department } from '../../models';
 import {OrganizationsDTO} from './utils';
@@ -20,6 +21,13 @@ export const getById = async (id: string): Promise<Organization> => {
 
   return organizations;
 };
+
+export const getMyOrganizations = async (): Promise<Organization[]> => {
+  const user_id = '1';
+  const organizations = await findOrganizationsByUser(user_id);
+  if (isNullOrUndefined(organizations)) throw new HTTP404Error();
+  return organizations;
+}
 
 //TODO
 export const getOrganizations = async (id: string): Promise<Organization> => {

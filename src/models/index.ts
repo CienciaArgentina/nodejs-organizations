@@ -1,5 +1,5 @@
 export * from './Address';
-export * from './Organizations';
+export * from './Organization';
 export * from './Projects';
-export * from './Departments';
+export * from './Department';
 export * from './OrganizationType';

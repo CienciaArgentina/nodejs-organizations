@@ -1,6 +1,6 @@
 import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
-import  { Project }  from './';
+import  { Project }  from '.';
 
 //TODO: cambiar clases y archivos a singular
 
@@ -37,7 +37,7 @@ export class Department extends Model {
     },
     organization: {
       relation: Model.BelongsToOneRelation,
-      modelClass: require('./Organizations').default,
+      modelClass: require('./Organization').Organization,
       join: {
         from: 'department.organization_id',
         to: 'organization.id'

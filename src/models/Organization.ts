@@ -1,6 +1,6 @@
 import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
-import { Address,OrganizationType } from './';
+import { Address, OrganizationType } from '.';
 
 export class Organization extends Model {
 
@@ -11,7 +11,7 @@ export class Organization extends Model {
   description?:string
   website?:string
   is_active?:boolean
-    
+
   static tableName = TableNames.Organization;
 
   static get jsonSchema() {
@@ -45,6 +45,18 @@ export class Organization extends Model {
   }
 
   static relationMappings = () => ({
+    user: {
+      relation: Model.ManyToManyRelation,
+      modelClass: require('./User').User,
+      join: {
+        from: 'organization.id',
+        through: {
+          from: 'user_organization.user_id',
+          to: 'user_organization.organization_id'
+        },
+        to: 'userprofiles.id'
+      }
+    },
     organization_type: {
       relation: Model.HasOneRelation,
       modelClass: OrganizationType,
@@ -63,7 +75,7 @@ export class Organization extends Model {
     },
     departments: {
       relation: Model.HasManyRelation,
-      modelClass: require('./Departments').default,
+      modelClass: require('./Department').Department,
       join: {
         from: 'organization.id',
         to: 'department.organization_id'

@@ -13,5 +13,6 @@ module.exports = {
       min: process.env.DB_CIENCIAARG_POOL_MIN || 1,
       max: process.env.DB_CIENCIAARG_POOL_MAX || 2,
     },
+    debug:true
   },
 };

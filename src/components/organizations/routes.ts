@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import {
   getById,
   getOrganizations,
+  getMyOrganizations,
   getDepartmentById,
   createOrganization,
   patchOrgnization
@@ -9,6 +10,22 @@ import {
 import { HttpStatusCode } from '../../commons/constants';
 
 export default [
+  /*TODO:
+    tabla organizaciones-usuario (a mano)
+    ver mis organizaciones
+    /organizations/me ?
+    /organizations + headers ?
+  */
+ {
+   path:'/organizations/me',
+   method: 'get',
+   handler: [
+     async (req: Request, res: Response): Promise<void> => {
+       const result = await getMyOrganizations();
+       res.status(HttpStatusCode.Ok).send(result)
+     }
+   ]
+ },
   {
     path: '/organizations/:id',
     method: 'get',
