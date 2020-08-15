@@ -1,6 +1,4 @@
-import {Organization, Department} from '../../models';
-
-const defaultGraphOptions = { minimize: false, joinOperation: 'leftJoin' };
+import {Organization, Department, Project} from '../../models';
 
 export const findOrganizationsByUser = async (id: string): Promise<Organization[] | undefined> => {
   const result =  await Organization.query()
@@ -43,3 +41,10 @@ export const updateOrganization = async (id: string, organization: Organization)
   return true
 
 };
+
+export const findProjectById = async (id:string): Promise<Project | undefined> => {
+  return await Project.query()
+  .modify('defaultSelects')
+  // .modify('populateModel')
+  .findById(id);
+}

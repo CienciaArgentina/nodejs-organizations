@@ -3,9 +3,12 @@ import {
   getById,
   getOrganizations,
   getMyOrganizations,
-  getDepartmentById,
   createOrganization,
-  patchOrgnization
+  patchOrgnization,
+  //departments
+  getDepartmentById,
+  //projects
+  getProjectById
 } from './service';
 import { HttpStatusCode } from '../../commons/constants';
 
@@ -73,6 +76,16 @@ export default [
       async ({ params }: Request, res: Response): Promise<void> => {
         const result = await getDepartmentById(params.id);
         res.status(HttpStatusCode.Ok).send(result);
+      }
+    ]
+  },
+  {
+    path: '/projects/:id',
+    method: 'get',
+    handler: [
+      async ( { params }:Request, res:Response): Promise<void> => {
+        const result = await getProjectById(params.id)
+        res.status(HttpStatusCode.Ok).send(result)
       }
     ]
   },

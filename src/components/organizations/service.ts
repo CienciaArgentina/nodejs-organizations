@@ -3,11 +3,14 @@ import { HTTP404Error } from '@cienciaargentina/nodejs-backend-commons';
 import {
   findOrganizationsById,
   findOrganizationsByUser,
-  findDepartmentById,
   saveOrganization,
   updateOrganization,
+  //departments
+  findDepartmentById,
+  //projects
+  findProjectById,
 } from './repository';
-import { Organization,Department } from '../../models';
+import { Organization,Department,Project } from '../../models';
 import {OrganizationsDTO} from './utils';
 import { mapperFromOrganizationDTO } from './utils/mapper';
 
@@ -56,4 +59,10 @@ export const createOrganization = async (organizationDTO: OrganizationsDTO): Pro
 export const patchOrgnization = async (id: string, organization: Organization ): Promise<Boolean> => {
   await updateOrganization(id, organization);
   return true;
+};
+
+export const getProjectById = async (id: string): Promise<Project> => {
+  const project = await findProjectById(id);
+  if (isNullOrUndefined(project)) throw new HTTP404Error();
+  return project;
 };

@@ -17,11 +17,15 @@ export class Organization extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
+      additionalProperties: false,
       required: ['name'],
       properties: {
         id: { type:'integer', read_only:true },
         acronym: { type:['string', 'null'] },
-        name: { type:'string' },
+        name: {
+          type:'string',
+          minLength: 5
+        },
         summary: { type:['string', 'null'] },
         description: { type:['string', 'null'], minLength: 1, maxLength: 10 },
         website: { type:['string', 'null'] },

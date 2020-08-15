@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@cienciaargentina/nodejs-backend-commons": "^1.2.3",
+    "ajv": "^6.12.4",
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
