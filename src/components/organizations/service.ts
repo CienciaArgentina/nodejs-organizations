@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from 'util';
-import { HTTP404Error } from '@cienciaargentina/nodejs-backend-commons';
+import { HTTP404Error } from 'ciencia-argentina-backend-commons';
 import {
   findOrganizationsById,
   findOrganizationsByUser,

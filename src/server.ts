@@ -1,6 +1,7 @@
-import { logger,startServer,connectDb } from '@cienciaargentina/nodejs-backend-commons';
+import { logger,startServer } from 'ciencia-argentina-backend-commons';
 import routes from './components';
-const knexConfig = require('../knexfile');
+import { connectDb } from './config/db/db';
+import { cienciaArgDb } from './config/db/knexfile';
 
 process.on('uncaughtException', (e) => {
   logger.error(e);
@@ -11,5 +12,5 @@ process.on('unhandledRejection', (e) => {
   process.exit(1);
 });
 
+connectDb(cienciaArgDb);
 startServer(+(process.env.HTTP_PORT || 8080),routes);
-connectDb(knexConfig.cienciaArgDb);
