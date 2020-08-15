@@ -16,8 +16,34 @@ export class Project extends Model {
         ref('experimental_model')
       )
     },
+    populateModel(query:any) {
+      query
+      .withGraphJoined('department(defaultSelects)')
+      .withGraphFetched('organization(defaultSelects)')
+    }
   }
 
-  
+  static relationMappings = () => ({
+    department: {
+      relation: Model.BelongsToOneRelation,
+      modelClass: require('./Department').Department,
+      join: {
+        from: 'project.id',
+        to: 'department.id'
+      }
+    },
+    organization: {
+      relation: Model.HasOneThroughRelation,
+      modelClass: require('./Organization').Organization,
+      join: {
+        from: 'project.department_id',
+        through: {
+          from: 'department.id',
+          to: 'department.organization_id'
+        },
+        to: 'organization.id'
+      }
+    }
+  })
 
 }
