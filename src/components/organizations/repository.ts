@@ -17,15 +17,6 @@ export const findOrganizationsById = async (id: string): Promise<Organization | 
 
 };
 
-export const findDepartmentById = async (id: string): Promise<Department | undefined> => {
-
-  return await Department.query().
-  modify('defaultSelects').
-  modify('populateModel').
-  findById(id);
-
-};
-
 export const saveOrganization = async (organization: Organization): Promise<number> => {
   const graph = await Organization.query()
   .insert(organization)
@@ -41,10 +32,3 @@ export const updateOrganization = async (id: string, organization: Organization)
   return true
 
 };
-
-export const findProjectById = async (id:string): Promise<Project | undefined> => {
-  return await Project.query()
-  .modify('defaultSelects')
-  // .modify('populateModel')
-  .findById(id);
-}

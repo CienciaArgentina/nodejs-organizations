@@ -5,10 +5,6 @@ import {
   findOrganizationsByUser,
   saveOrganization,
   updateOrganization,
-  //departments
-  findDepartmentById,
-  //projects
-  findProjectById,
 } from './repository';
 import { Organization,Department,Project } from '../../models';
 import {OrganizationsDTO} from './utils';
@@ -40,13 +36,6 @@ export const getOrganizations = async (id: string): Promise<Organization> => {
   return organizations;
 };
 
-export const getDepartmentById = async (id: string): Promise<Department> => {
-  const department = await findDepartmentById(id);
-  if (isNullOrUndefined(department)) throw new HTTP404Error();
-
-  return department;
-};
-
 export const createOrganization = async (organizationDTO: OrganizationsDTO): Promise<OrganizationCreated> => {
   const organization = mapperFromOrganizationDTO(organizationDTO)
   const id = await saveOrganization(organization);
@@ -59,10 +48,4 @@ export const createOrganization = async (organizationDTO: OrganizationsDTO): Pro
 export const patchOrgnization = async (id: string, organization: Organization ): Promise<Boolean> => {
   await updateOrganization(id, organization);
   return true;
-};
-
-export const getProjectById = async (id: string): Promise<Project> => {
-  const project = await findProjectById(id);
-  if (isNullOrUndefined(project)) throw new HTTP404Error();
-  return project;
 };

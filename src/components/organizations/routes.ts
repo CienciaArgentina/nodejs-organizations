@@ -5,13 +5,9 @@ import {
   getMyOrganizations,
   createOrganization,
   patchOrgnization,
-  //departments
-  getDepartmentById,
-  //projects
-  getProjectById
 } from './service';
 import { HttpStatusCode } from '../../commons/constants';
-
+import { Paths } from './utils'
 export default [
   /*TODO:
     tabla organizaciones-usuario (a mano)
@@ -20,7 +16,7 @@ export default [
     /organizations + headers ?
   */
  {
-   path:'/organizations/me',
+   path:Paths.Me,
    method: 'get',
    handler: [
      async (req: Request, res: Response): Promise<void> => {
@@ -30,7 +26,7 @@ export default [
    ]
  },
   {
-    path: '/organizations/:id',
+    path: Paths.GetById,
     method: 'get',
     handler: [
       async ({ params }: Request, res: Response): Promise<void> => {
@@ -40,7 +36,7 @@ export default [
     ],
   },
   {
-    path: '/organizations',
+    path: Paths.Get,
     method: 'get',
     handler: [
       async ({ params }: Request, res: Response): Promise<void> => {
@@ -50,7 +46,7 @@ export default [
     ],
   },
   {
-    path: '/organizations',
+    path: Paths.Post,
     method: 'post',
     handler: [
       async ( { body }: Request, res: Response): Promise<void> => {
@@ -60,42 +56,13 @@ export default [
     ],
   },
   {
-    path: '/organizations/:id/',
+    path: Paths.Patch,
     method: 'patch',
     handler: [
       async ( req: Request, res: Response): Promise<void> => {
         const result = await patchOrgnization(req.params.id, req.body);
-        res.status(HttpStatusCode.Created).send(result);
-      },
-    ],
-  },
-  {
-    path: '/departments/:id',
-    method: 'get',
-    handler: [
-      async ({ params }: Request, res: Response): Promise<void> => {
-        const result = await getDepartmentById(params.id);
         res.status(HttpStatusCode.Ok).send(result);
-      }
-    ]
-  },
-  {
-    path: '/projects/:id',
-    method: 'get',
-    handler: [
-      async ( { params }:Request, res:Response): Promise<void> => {
-        const result = await getProjectById(params.id)
-        res.status(HttpStatusCode.Ok).send(result)
-      }
-    ]
-  },
-  {
-    path: '/ping',
-    method: 'get',
-    handler: [
-      async (req: Request, res: Response): Promise<void> => {
-        res.status(HttpStatusCode.Ok).send('pong');
       },
     ],
-  },
+  }
 ];
