@@ -1,14 +1,15 @@
 import { isNullOrUndefined } from 'util';
-import { HTTP404Error } from 'ciencia-argentina-backend-commons';
+import { HTTP404Error, HTTP400Error } from 'ciencia-argentina-backend-commons';
 import {
   findOrganizationsById,
   findOrganizationsByUser,
   saveOrganization,
   updateOrganization,
 } from './repository';
-import { Organization,Department,Project } from '../../models';
+import { Organization } from '../../models';
 import {OrganizationsDTO} from './utils';
 import { mapperFromOrganizationDTO } from './utils/mapper';
+import {validateCreateOrganization} from './utils/validators/post'
 
 interface OrganizationCreated {
   id: number;
@@ -37,6 +38,10 @@ export const getOrganizations = async (id: string): Promise<Organization> => {
 };
 
 export const createOrganization = async (organizationDTO: OrganizationsDTO): Promise<OrganizationCreated> => {
+  const errors = validateCreateOrganization(organizationDTO);
+  
+  if(errors.length) throw new HTTP400Error(errors);
+  
   const organization = mapperFromOrganizationDTO(organizationDTO)
   const id = await saveOrganization(organization);
   const response : OrganizationCreated = {

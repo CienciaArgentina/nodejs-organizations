@@ -25,10 +25,10 @@ export const saveOrganization = async (organization: Organization): Promise<numb
 };
 
 export const updateOrganization = async (id: string, organization: Organization): Promise<boolean> => {
-  await Organization
+  const result = await Organization
   .query()
   .patch(organization)
   .where('id', id)
-  return true
+  return !!result;
 
 };
