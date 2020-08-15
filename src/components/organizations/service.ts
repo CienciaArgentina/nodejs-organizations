@@ -6,7 +6,7 @@ import {
   saveOrganization,
   updateOrganization,
 } from './repository';
-import { Organization,Department,Project } from '../../models';
+import { Organization } from '../../models';
 import {OrganizationsDTO} from './utils';
 import { mapperFromOrganizationDTO } from './utils/mapper';
 
