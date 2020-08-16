@@ -1,7 +1,7 @@
-export interface OrganizationsDTO  {
-	acronym?: string,
+export interface CreateOrganizationDTO  {
+	acronym: string|null,
 	name: string,
-	summary?: string,
-	description?: string,
-	website?: string
+	summary?: string|null,
+	description?: string|null,
+	website?: string|null
 }

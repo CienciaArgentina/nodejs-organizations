@@ -3,5 +3,5 @@ export enum Paths {
     GetById = '/organizations/:id',
     Get = '/organizations',
     Post = '/organizations',
-    Patch = '/organizations',
+    Patch = '/organizations/:id',
 }

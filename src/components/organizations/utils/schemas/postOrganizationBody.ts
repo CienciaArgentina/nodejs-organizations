@@ -5,7 +5,22 @@ export const postOrganizationBody: JSONSchema7 = {
     properties: {
         name: {
             type: 'string',
-            maxLength: 16
+            minLength: 1,
+            maxLength: 50
+        },
+        acronym: {
+            type: ['string', 'null']
+        },
+        summary: {
+            type:['string', 'null']
+        },
+        description: {
+            type:['string', 'null'],
+            minLength: 20,
+            maxLength: 600
+        },
+        website: {
+            type:['string', 'null']
         }
     }
 }

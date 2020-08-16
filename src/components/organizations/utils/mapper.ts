@@ -1,5 +1,5 @@
 import { Organization } from '../../../models';
-import { OrganizationsDTO } from './'
+import { CreateOrganizationDTO } from './'
 
 export const mapperFromOrganizationDTO = ( {
     acronym,
@@ -7,7 +7,7 @@ export const mapperFromOrganizationDTO = ( {
     summary,
     description,
     website
-  }:OrganizationsDTO ): Organization => {
+  }:CreateOrganizationDTO ): Organization => {
     let organization: Organization = new Organization()
     organization.acronym = acronym
     organization.name = name

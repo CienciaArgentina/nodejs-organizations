@@ -2,8 +2,6 @@ import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
 import  { Project }  from '.';
 
-//TODO: cambiar clases y archivos a singular
-
 export class Department extends Model {
 
   static tableName = TableNames.Departments;

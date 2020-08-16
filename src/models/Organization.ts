@@ -4,35 +4,15 @@ import { Address, OrganizationType } from '.';
 
 export class Organization extends Model {
 
-  id?:number
-  acronym?:string
-  name!:string
-  summary?:string
-  description?:string
-  website?:string
-  is_active?:boolean
+  id?: number
+  acronym!: string | null
+  name!: string
+  summary?: string | null
+  description?: string | null
+  website?: string | null
+  is_active?: boolean
 
   static tableName = TableNames.Organization;
-
-  static get jsonSchema() {
-    return {
-      type: 'object',
-      additionalProperties: false,
-      required: ['name'],
-      properties: {
-        id: { type:'integer', read_only:true },
-        acronym: { type:['string', 'null'] },
-        name: {
-          type:'string',
-          minLength: 5
-        },
-        summary: { type:['string', 'null'] },
-        description: { type:['string', 'null'], minLength: 1, maxLength: 10 },
-        website: { type:['string', 'null'] },
-        is_active: { type:['boolean'] },
-      }
-    }
-  }
 
   static is_active: Boolean
 

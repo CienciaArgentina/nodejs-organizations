@@ -7,7 +7,7 @@ import {
   updateOrganization,
 } from './repository';
 import { Organization } from '../../models';
-import {OrganizationsDTO} from './utils';
+import {CreateOrganizationDTO} from './utils';
 import { mapperFromOrganizationDTO } from './utils/mapper';
 import {validateCreateOrganization} from './utils/validators/post'
 
@@ -37,7 +37,7 @@ export const getOrganizations = async (id: string): Promise<Organization> => {
   return organizations;
 };
 
-export const createOrganization = async (organizationDTO: OrganizationsDTO): Promise<OrganizationCreated> => {
+export const createOrganization = async (organizationDTO: CreateOrganizationDTO): Promise<OrganizationCreated> => {
   const errors = validateCreateOrganization(organizationDTO);
   
   if(errors.length) throw new HTTP400Error(errors);
