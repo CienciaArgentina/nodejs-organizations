@@ -64,5 +64,14 @@ export default [
         res.status(HttpStatusCode.Ok).send(result);
       },
     ],
-  }
+  },
+  {
+    path: '/ping',
+    method: 'get',
+    handler: [
+      async (req: Request, res: Response): Promise<void> => {
+        res.status(HttpStatusCode.Ok).send('pong');
+      },
+    ],
+  },
 ];
