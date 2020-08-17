@@ -40,7 +40,7 @@ export const getOrganizations = async (id: string): Promise<Organization> => {
 export const createOrganization = async (organizationDTO: CreateOrganizationDTO): Promise<OrganizationCreated> => {
   const errors = validateCreateOrganization(organizationDTO);
   
-  if(errors.length) throw new HTTP400Error(errors);
+  if(errors) throw new HTTP400Error(errors);
   
   const organization = mapperFromOrganizationDTO(organizationDTO)
   const id = await saveOrganization(organization);

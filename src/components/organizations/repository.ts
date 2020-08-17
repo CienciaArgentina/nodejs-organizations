@@ -1,4 +1,4 @@
-import {Organization, Department, Project} from '../../models';
+import {Organization} from '../../models';
 
 export const findOrganizationsByUser = async (id: string): Promise<Organization[] | undefined> => {
   const result =  await Organization.query()

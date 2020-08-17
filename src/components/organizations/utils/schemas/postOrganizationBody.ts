@@ -5,8 +5,7 @@ export const postOrganizationBody: JSONSchema7 = {
     properties: {
         name: {
             type: 'string',
-            minLength: 1,
-            maxLength: 50
+            minLength: 1
         },
         acronym: {
             type: ['string', 'null']
@@ -16,11 +15,12 @@ export const postOrganizationBody: JSONSchema7 = {
         },
         description: {
             type:['string', 'null'],
-            minLength: 20,
-            maxLength: 600
+            minLength: 5,
+            maxLength: 1000
         },
         website: {
-            type:['string', 'null']
+            type:['string', 'null'],
+            pattern: "^(?:https?:\/\/)([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)(?:[\/:?=&#]{1}[\da-z\.-]+)*[\/\?]?$"
         }
     }
 }
