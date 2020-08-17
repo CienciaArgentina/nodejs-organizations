@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from 'util';
-import { HTTP404Error, HTTP400Error } from 'ciencia-argentina-backend-commons';
+import { HTTP404Error, HttpValidationError } from 'ciencia-argentina-backend-commons';
 import {
   findOrganizationsById,
   findOrganizationsByUser,
@@ -40,7 +40,7 @@ export const getOrganizations = async (id: string): Promise<Organization> => {
 export const createOrganization = async (organizationDTO: OrganizationsDTO): Promise<OrganizationCreated> => {
   const errors = validateCreateOrganization(organizationDTO);
   
-  if(errors.length) throw new HTTP400Error(errors);
+  if(errors) throw new HttpValidationError(errors);
   
   const organization = mapperFromOrganizationDTO(organizationDTO)
   const id = await saveOrganization(organization);
