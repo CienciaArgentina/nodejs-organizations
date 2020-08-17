@@ -9,12 +9,6 @@ import {
 import { HttpStatusCode } from '../../commons/constants';
 import { Paths } from './utils'
 export default [
-  /*TODO:
-    tabla organizaciones-usuario (a mano)
-    ver mis organizaciones
-    /organizations/me ?
-    /organizations + headers ?
-  */
  {
    path:Paths.Me,
    method: 'get',
