@@ -1,3 +1,4 @@
 export enum Paths {
-    GetById = '/departmens/:id',
+    GetById = '/departments/:id',
+    CreateDepartment = '/departments'
 }
