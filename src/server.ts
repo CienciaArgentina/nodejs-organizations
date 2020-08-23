@@ -12,7 +12,5 @@ process.on('unhandledRejection', (e) => {
   process.exit(1);
 });
 
-// (async (): Promise<void> => {
-  connectDb(cienciaArgDb);
-  startServer(+(process.env.HTTP_PORT || 8080),routes);  
-// })
+connectDb(cienciaArgDb);
+startServer(+(process.env.HTTP_PORT || 8080),routes);

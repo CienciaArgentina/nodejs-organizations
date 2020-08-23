@@ -4,7 +4,17 @@ import  { Project }  from '.';
 
 export class Department extends Model {
 
+	name!: string
+	description?: string | null
+	website?: string | null
+	organization_id!: number
+	department_head?: string | null
+
   static tableName = TableNames.Departments;
+
+  static get idColumn() {
+    return 'id';
+  }
 
   static modifiers = {
     defaultSelects(query:any) {
