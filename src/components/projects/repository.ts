@@ -6,3 +6,9 @@ export const findProjectById = async (id:string): Promise<Project | undefined> =
   .modify('populateModel')
   .findById(id);
 }
+
+export const saveProject = async(project:Project): Promise<number> => {
+  const graph = await Project.query()
+  .insert(project)
+  return graph.$id()
+}

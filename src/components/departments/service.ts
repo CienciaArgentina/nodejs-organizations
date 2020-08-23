@@ -5,8 +5,7 @@ import {
   saveDepartment
 } from './repository';
 import { Department} from '../../models';
-import { CreateDepartmentDTO } from './utils';
-import { mapperFromDepartmentDTO } from './utils/mapper'
+import { CreateDepartmentDTO, mapperFromDepartmentDTO } from './utils';
 import { validateCreateDepartment } from './utils/validators/post'
 
 export const getDepartmentById = async (id: string): Promise<Department> => {

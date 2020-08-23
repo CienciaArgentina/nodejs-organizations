@@ -2,6 +2,12 @@ import { TableNames } from '../commons/constants';
 import { Model } from 'objection';
 
 export class Project extends Model {
+
+  name!: string
+	description?: string | null
+	project_head?: string | null
+	experimental_model?: string | null
+	department_id!: number
     
   static tableName = TableNames.Projects;
 
