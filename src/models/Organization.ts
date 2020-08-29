@@ -36,10 +36,10 @@ export class Organization extends Model {
       relation: Model.ManyToManyRelation,
       modelClass: User,
       join: {
-        from: 'organization.id',
+        from: `${TableNames.Organization}.id`,
         through: {
-          from: 'user_organization.user_id',
-          to: 'user_organization.organization_id'
+          from: `${TableNames.User}.user_id`,
+          to: `${TableNames.User}.organization_id`
         },
         to: 'userprofiles.id'
       }
@@ -49,8 +49,8 @@ export class Organization extends Model {
       relation: Model.HasOneRelation,
       modelClass: OrganizationType,
       join: {
-        from: 'organization.organization_type_id',
-        to: 'organization_type.id'
+        from: `${TableNames.Organization}.organization_type_id`,
+        to: `${TableNames.OrganizationType}.id`
       }
     }; 
 
@@ -58,8 +58,8 @@ export class Organization extends Model {
       relation: Model.HasOneRelation,
       modelClass: Address,
       join: {
-        from: 'organization.address_id',
-        to: 'address.id'
+        from: `${TableNames.Organization}.address_id`,
+        to: `${TableNames.Address}.id`
       }
     }; 
 
@@ -67,8 +67,8 @@ export class Organization extends Model {
       relation: Model.HasManyRelation,
       modelClass: Department,
       join: {
-        from: 'organization.id',
-        to: 'department.organization_id'
+        from: `${TableNames.Organization}.id`,
+        to: `${TableNames.Departments}.organization_id`
       }
     }; 
 
