@@ -1,4 +1,4 @@
-import {createDepartmentBody} from '../schemas/ceateDepartmentBody'
+import {createDepartmentBody} from '../schemas/createDepartmentBody'
 import {CreateDepartmentDTO} from '../models'
 import {ValidationError,validateJsonSchema} from 'ciencia-argentina-backend-commons'
 
