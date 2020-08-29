@@ -34,7 +34,7 @@ export class Project extends Model {
       relation: Model.BelongsToOneRelation,
       modelClass: require('./Department').Department,
       join: {
-        from: 'project.id',
+        from: 'project.department_id',
         to: 'department.id'
       }
     },
