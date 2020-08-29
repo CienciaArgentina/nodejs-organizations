@@ -1,9 +1,11 @@
 import { TableNames } from '../commons/constants';
-import { Model } from 'objection';
+import { Model, RelationMapping, RelationMappings } from 'objection';
 import { Address, OrganizationType } from '.';
+import { User,Department,} from './'
 
 export class Organization extends Model {
-
+  static tableName = TableNames.Organization;
+  
   id?: number
   acronym!: string | null
   name!: string
@@ -11,8 +13,9 @@ export class Organization extends Model {
   description?: string | null
   website?: string | null
   is_active?: boolean
+  address!: Address
+  address_id!: string
 
-  static tableName = TableNames.Organization;
 
   static is_active: Boolean
 
@@ -28,10 +31,10 @@ export class Organization extends Model {
     }
   }
 
-  static relationMappings = () => ({
-    user: {
+  static get relationMappings(): RelationMappings {
+    const user: RelationMapping<User> = {
       relation: Model.ManyToManyRelation,
-      modelClass: require('./User').User,
+      modelClass: User,
       join: {
         from: 'organization.id',
         through: {
@@ -40,30 +43,35 @@ export class Organization extends Model {
         },
         to: 'userprofiles.id'
       }
-    },
-    organization_type: {
+    };
+
+    const organization_type: RelationMapping<OrganizationType> = {
       relation: Model.HasOneRelation,
       modelClass: OrganizationType,
       join: {
         from: 'organization.organization_type_id',
         to: 'organization_type.id'
       }
-    },
-    address: {
+    }; 
+
+    const address: RelationMapping<Address> = {
       relation: Model.HasOneRelation,
       modelClass: Address,
       join: {
         from: 'organization.address_id',
-        to: 'address.Id'
+        to: 'address.id'
       }
-    },
-    departments: {
+    }; 
+
+    const departments: RelationMapping<Department> = {
       relation: Model.HasManyRelation,
-      modelClass: require('./Department').Department,
+      modelClass: Department,
       join: {
         from: 'organization.id',
         to: 'department.organization_id'
       }
-    },
-  })
+    }; 
+
+    return { address,organization_type,departments,user}
+  }
 }

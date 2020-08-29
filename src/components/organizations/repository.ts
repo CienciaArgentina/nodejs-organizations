@@ -18,9 +18,19 @@ export const findOrganizationsById = async (id: string): Promise<Organization | 
 };
 
 export const saveOrganization = async (organization: Organization): Promise<number> => {
-  const graph = await Organization.query()
-  .insert(organization)
-  return graph.$id()
+
+  const transaction = await Organization.startTransaction();
+  try {
+    const graph = await Organization.query()
+    .insertGraph(organization)
+
+    transaction.commit();
+    return graph.$id();
+
+  }catch(error){
+    transaction.rollback();
+    throw error;
+  }
 
 };
 

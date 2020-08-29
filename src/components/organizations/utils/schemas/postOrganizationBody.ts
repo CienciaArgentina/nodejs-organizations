@@ -1,5 +1,5 @@
 import { JSONSchema7 } from 'json-schema'
-
+import { Address } from './Address'
 export const postOrganizationBody: JSONSchema7 = {
   type: 'object',
   properties: {
@@ -7,6 +7,7 @@ export const postOrganizationBody: JSONSchema7 = {
       type: 'string',
       minLength: 1
     },
+    address: Address,
     acronym: {
       type: ['string', 'null']
     },
@@ -22,5 +23,6 @@ export const postOrganizationBody: JSONSchema7 = {
       type: ['string', 'null'],
       pattern: "^(?:https?:\/\/)([\da-z\.-]+\.[a-z\.]{2,6}|[\d\.]+)(?:[\/:?=&#]{1}[\da-z\.-]+)*[\/\?]?$"
     }
-  }
+  },
+  required: ['name','address']
 }
