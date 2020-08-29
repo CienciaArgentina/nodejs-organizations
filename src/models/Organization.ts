@@ -14,7 +14,7 @@ export class Organization extends Model {
   website?: string | null
   is_active?: boolean
   address!: Address
-  address_id!: string
+  address_id!: number
 
 
   static is_active: Boolean

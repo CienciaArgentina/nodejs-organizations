@@ -5,6 +5,7 @@ export class Address extends Model {
     
  static tableName = TableNames.Address;
 
+  id!:number
   street_name!: string
   street_number!: string
   zip_code!: string
@@ -13,4 +14,7 @@ export class Address extends Model {
   latitude?: string | null
   longitude?: string | null
 
+  static get idColumn(): string {
+    return 'id'
+  }
 }
