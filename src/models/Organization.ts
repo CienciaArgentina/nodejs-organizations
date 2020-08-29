@@ -55,7 +55,7 @@ export class Organization extends Model {
     }; 
 
     const address: RelationMapping<Address> = {
-      relation: Model.HasOneRelation,
+      relation: Model.BelongsToOneRelation,
       modelClass: Address,
       join: {
         from: `${TableNames.Organization}.address_id`,
