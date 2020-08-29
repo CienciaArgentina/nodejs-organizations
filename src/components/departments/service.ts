@@ -38,6 +38,10 @@ export const updateDepartmentById = async (id: string,departmentDTO:CreateDepart
   const department = await findDepartmentById(id);
   if (department) throw new HTTP404Error();
   
+  const errors = validateCreateDepartment(departmentDTO);
+  
+  if(errors) throw new HttpValidationError(errors);
+
   const departmentRequest = mapperFromDepartmentDTO(departmentDTO)
   departmentRequest.id = id;
   const result = await updateDepartment(departmentRequest);
