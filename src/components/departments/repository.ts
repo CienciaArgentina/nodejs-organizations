@@ -12,3 +12,13 @@ export const saveDepartment = async (department:Department): Promise<number> => 
   .insert(department)
   return graph.$id()
 }
+
+export const updateDepartment = async (department:Department): Promise<number> => {
+  const graph = await Department.query()
+  .update(department)
+  return graph;
+}
+
+export const deleteDepartment = async (id:string): Promise<void> => {
+  await Department.query().deleteById(id);
+}

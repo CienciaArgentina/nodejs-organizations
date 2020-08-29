@@ -2,7 +2,9 @@ import { isNullOrUndefined } from 'util';
 import { HTTP404Error, HttpValidationError } from 'ciencia-argentina-backend-commons';
 import {
   findDepartmentById,
-  saveDepartment
+  saveDepartment,
+  updateDepartment,
+  deleteDepartment,
 } from './repository';
 import { Department} from '../../models';
 import { CreateDepartmentDTO, mapperFromDepartmentDTO } from './utils';
@@ -31,3 +33,21 @@ export const createDepartment = async (departmentDTO:CreateDepartmentDTO): Promi
   }
   return response;
 }
+
+export const updateDepartmentById = async (id: string,departmentDTO:CreateDepartmentDTO): Promise<boolean> => {
+  const department = await findDepartmentById(id);
+  if (department) throw new HTTP404Error();
+  
+  const departmentRequest = mapperFromDepartmentDTO(departmentDTO)
+  departmentRequest.id = id;
+  const result = await updateDepartment(departmentRequest);
+
+  return !!result;
+};
+
+export const deleteDepartmentById = async (id: string): Promise<void> => {
+  const department = await findDepartmentById(id);
+  if (department) throw new HTTP404Error();
+
+  await deleteDepartment(id);
+};

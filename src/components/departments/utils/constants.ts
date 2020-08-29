@@ -1,4 +1,6 @@
 export enum Paths {
     GetById = '/departments/:id',
-    CreateDepartment = '/departments'
+    CreateDepartment = '/departments',
+    Delete = '/departments/:id',
+    Put = '/departments/:id',
 }

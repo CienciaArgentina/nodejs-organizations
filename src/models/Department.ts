@@ -3,7 +3,7 @@ import { Model } from 'objection';
 import  { Project }  from '.';
 
 export class Department extends Model {
-
+  id!: string
 	name!: string
 	description?: string | null
 	website?: string | null
