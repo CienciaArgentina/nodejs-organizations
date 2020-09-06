@@ -1,7 +1,7 @@
 import { TableNames } from '../commons/constants';
 import { Model, RelationMapping, RelationMappings } from 'objection';
 import { Address, OrganizationType } from '.';
-import { User,Department,} from './'
+import { UserOrganization,Department,} from './'
 
 export class Organization extends Model {
   static tableName = TableNames.Organization;
@@ -32,16 +32,16 @@ export class Organization extends Model {
   }
 
   static get relationMappings(): RelationMappings {
-    const user: RelationMapping<User> = {
+    const user: RelationMapping<UserOrganization> = {
       relation: Model.ManyToManyRelation,
-      modelClass: User,
+      modelClass: UserOrganization,
       join: {
         from: `${TableNames.Organization}.id`,
         through: {
-          from: `${TableNames.User}.user_id`,
-          to: `${TableNames.User}.organization_id`
+          from: `${TableNames.UserOrganization}.user_id`,
+          to: `${TableNames.UserOrganization}.organization_id`
         },
-        to: 'userprofiles.id'
+        to: `${TableNames.UserOrganization}.user_id`
       }
     };
 

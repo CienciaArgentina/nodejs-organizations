@@ -8,6 +8,10 @@ export interface CreateOrganizationDTO  {
 	email_domains?:string[]
 }
 
+export interface AddUserToOrganizationDTO  {
+	user_id: string
+}
+
 export interface AddressDTO  {
 	street_name: string,
 	street_number: string,

@@ -4,5 +4,5 @@ export enum TableNames {
   Address = 'address',
   Departments = 'department',
   Projects = 'project',
-  User = 'userprofiles'
+  UserOrganization = 'user_organization'
 }

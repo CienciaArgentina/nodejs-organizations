@@ -5,21 +5,22 @@ import {
   findOrganizationsByUser,
   saveOrganization,
   updateOrganization,
+  addUser
 } from './repository';
 import { Organization } from '../../models';
-import {CreateOrganizationDTO} from './utils';
+import { CreateOrganizationDTO,AddUserToOrganizationDTO } from './utils';
 import { mapperFromOrganizationDTO } from './utils/mapper';
-import {validateCreateOrganization} from './utils/validators/post'
+import { validateCreateOrganization } from './utils/validators/post'
 
 interface OrganizationCreated {
   id: number;
 }
 
 export const getById = async (id: string): Promise<Organization> => {
-  const organizations = await findOrganizationsById(id);
-  if (isNullOrUndefined(organizations)) throw new HTTP404Error();
+  const organization = await findOrganizationsById(id);
+  if (!organization) throw new HTTP404Error(`Organization don't exist`);
 
-  return organizations;
+  return organization;
 };
 
 export const getMyOrganizations = async (): Promise<Organization[]> => {
@@ -30,11 +31,19 @@ export const getMyOrganizations = async (): Promise<Organization[]> => {
 }
 
 //TODO
-export const getOrganizations = async (id: string): Promise<Organization> => {
-  const organizations = await findOrganizationsById(id);
-  if (isNullOrUndefined(organizations)) throw new HTTP404Error();
+export const getOrganizations = async (): Promise<Organization[]> => {
+  const user_id = '2';
+  const organizations = await findOrganizationsByUser(user_id);
+  if (!organizations?.length) throw new HTTP404Error();
 
   return organizations;
+};
+
+export const addUserToOrganization = async (organization_id: string,{user_id}: AddUserToOrganizationDTO): Promise<Organization> => {
+  const organization = await getById(organization_id);
+  
+  await addUser(organization_id,user_id);
+  return organization;
 };
 
 export const createOrganization = async (organizationDTO: CreateOrganizationDTO): Promise<OrganizationCreated> => {

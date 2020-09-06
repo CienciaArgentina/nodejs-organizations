@@ -1,6 +1,7 @@
 export enum Paths {
-    Me = '/organizations/me',
+    Get = '/organizations',
     GetById = '/organizations/:id',
     Post = '/organizations',
     Patch = '/organizations/:id',
+    PostProfile = '/organizations/:id/user-profiles',
 }

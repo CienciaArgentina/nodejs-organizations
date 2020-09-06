@@ -1,10 +1,11 @@
-import {Organization} from '../../models';
+import {Organization,UserOrganization} from '../../models';
 
-export const findOrganizationsByUser = async (id: string): Promise<Organization[] | undefined> => {
+export const findOrganizationsByUser = async (id: string): Promise<Organization[]> => {
   const result =  await Organization.query()
-  .leftJoinRelated('user')
-  .where({'user.id': id})
-  .modify('defaultSelects')
+  .leftJoinRelated('user').
+  // .where({'user_id': id}).
+  modify('defaultSelects').
+  modify('populateModel')
   return result
 }
 
@@ -31,6 +32,16 @@ export const saveOrganization = async (organization: Organization): Promise<numb
     transaction.rollback();
     throw error;
   }
+
+};
+
+
+export const addUser = async (organization_id:string,user_id:string): Promise<void> => {
+
+  await UserOrganization.query().insert({
+    user_id,
+    organization_id
+  });
 
 };
 
