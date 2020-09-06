@@ -30,7 +30,7 @@ export default [
     ],
   },
   {
-    path: Paths.Get,
+    path: Paths.GetById,
     method: 'get',
     handler: [
       async ({ params }: Request, res: Response): Promise<void> => {
