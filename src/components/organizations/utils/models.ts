@@ -28,3 +28,16 @@ export interface GeoDTO  {
 	type: string,
 	coordinates: Coordinates,
 }
+
+export interface OrganizationRequest  {
+	limit?: number,
+	offset?: number,
+}
+
+export interface PageResponse<T> {
+	limit?: number,
+	offset?: number,
+	total?:number,
+	results?: T[]
+}
+

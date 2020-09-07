@@ -8,7 +8,7 @@ import {
   addUser
 } from './repository';
 import { Organization } from '../../models';
-import { CreateOrganizationDTO,AddUserToOrganizationDTO } from './utils';
+import { CreateOrganizationDTO,AddUserToOrganizationDTO,OrganizationRequest,PageResponse } from './utils';
 import { mapperFromOrganizationDTO } from './utils/mapper';
 import { validateCreateOrganization } from './utils/validators/post'
 
@@ -23,20 +23,18 @@ export const getById = async (id: string): Promise<Organization> => {
   return organization;
 };
 
-export const getMyOrganizations = async (): Promise<Organization[]> => {
-  const user_id = '1';
-  const organizations = await findOrganizationsByUser(user_id);
-  if (isNullOrUndefined(organizations)) throw new HTTP404Error();
-  return organizations;
-}
-
-//TODO
-export const getOrganizations = async (): Promise<Organization[]> => {
+//TODO: Validaciones de todo tipo
+export const getOrganizations = async ({limit = 200,offset = 0}:OrganizationRequest): Promise<PageResponse<Organization>> => {
   const user_id = '2';
-  const organizations = await findOrganizationsByUser(user_id);
-  if (!organizations?.length) throw new HTTP404Error();
+  const results = await findOrganizationsByUser(user_id,limit,offset);
+  if (!results?.length) throw new HTTP404Error();
 
-  return organizations;
+  return {
+    total:0,
+    limit: +limit,
+    offset: +offset,
+    results
+  };
 };
 
 export const addUserToOrganization = async (organization_id: string,{user_id}: AddUserToOrganizationDTO): Promise<Organization> => {

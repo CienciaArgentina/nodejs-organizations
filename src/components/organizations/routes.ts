@@ -13,8 +13,8 @@ export default [
    path:Paths.Get,
    method: 'get',
    handler: [
-     async (req: Request, res: Response): Promise<void> => {
-       const result = await getOrganizations();
+     async ({query}: Request, res: Response): Promise<void> => {
+       const result = await getOrganizations(query);
        res.status(HttpStatusCode.Ok).send(result)
      }
    ]
