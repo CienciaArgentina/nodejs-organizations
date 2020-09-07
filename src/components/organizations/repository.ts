@@ -1,11 +1,13 @@
 import {Organization,UserOrganization} from '../../models';
 import { Page } from 'objection';
 
-export const findOrganizationsByUser = async (id: string,limit:number,offset:number): Promise<Organization[]> => {
+export const findOrganizationsByUser = async (id: string,limit:number,offset:number): Promise<Page<Organization>> => {
   const result = await Organization.query().
-  where({'user_organization.user_id': id}).
+  leftJoinRelation('user').
+  where({'user.user_id': id}).
   modify('defaultSelects').
-  modify('populateModel');
+  modify('populateModel').
+  page(offset,limit);
 
   return result
 }

@@ -26,11 +26,10 @@ export const getById = async (id: string): Promise<Organization> => {
 //TODO: Validaciones de todo tipo
 export const getOrganizations = async ({limit = 200,offset = 0}:OrganizationRequest): Promise<PageResponse<Organization>> => {
   const user_id = '2';
-  const results = await findOrganizationsByUser(user_id,limit,offset);
-  if (!results?.length) throw new HTTP404Error();
+  const {total,results} = await findOrganizationsByUser(user_id,limit,offset);
 
   return {
-    total:0,
+    total,
     limit: +limit,
     offset: +offset,
     results

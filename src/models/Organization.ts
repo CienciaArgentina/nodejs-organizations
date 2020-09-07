@@ -33,15 +33,11 @@ export class Organization extends Model {
 
   static get relationMappings(): RelationMappings {
     const user: RelationMapping<UserOrganization> = {
-      relation: Model.ManyToManyRelation,
+      relation: Model.HasManyRelation,
       modelClass: UserOrganization,
       join: {
         from: `${TableNames.Organization}.id`,
-        through: {
-          from: `${TableNames.UserOrganization}.user_id`,
-          to: `${TableNames.UserOrganization}.organization_id`
-        },
-        to: `${TableNames.UserOrganization}.user_id`
+        to: `${TableNames.UserOrganization}.organization_id`
       }
     };
 
