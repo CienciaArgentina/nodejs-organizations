@@ -14,6 +14,7 @@ export default [
    method: 'get',
    handler: [
      async ({query}: Request, res: Response): Promise<void> => {
+       //console.log(res.locals.jwt)
        const result = await getOrganizations(query);
        res.status(HttpStatusCode.Ok).send(result)
      }
