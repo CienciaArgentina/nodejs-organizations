@@ -1,8 +1,7 @@
-import {postOrganizationBody} from '../schemas/postOrganizationBody'
-import { CreateOrganizationDTO} from '../models'
-import {ValidationError,validateJsonSchema} from 'ciencia-argentina-backend-commons'
+import { postOrganizationBody } from '../schemas/postOrganizationBody';
+import { CreateOrganizationDTO } from '../models';
+import { HTTPCienciaError, validateJsonSchema } from 'ciencia-argentina-backend-commons';
 
-export const validateCreateOrganization = (organizationDTO: CreateOrganizationDTO): ValidationError | null => {
-    return validateJsonSchema(postOrganizationBody,organizationDTO,'example message');
+export const validateCreateOrganization = (organizationDTO: CreateOrganizationDTO): HTTPCienciaError | null => {
+  return validateJsonSchema(postOrganizationBody, organizationDTO, 'example message');
 };
-    

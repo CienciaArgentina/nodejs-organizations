@@ -1,8 +1,7 @@
-import {createDepartmentBody} from '../schemas/createDepartmentBody'
-import {CreateDepartmentDTO} from '../models'
-import {ValidationError,validateJsonSchema} from 'ciencia-argentina-backend-commons'
+import { createDepartmentBody } from '../schemas/createDepartmentBody';
+import { CreateDepartmentDTO } from '../models';
+import { HTTPCienciaError, validateJsonSchema } from 'ciencia-argentina-backend-commons';
 
-export const validateCreateDepartment = (departmentDTO: CreateDepartmentDTO): ValidationError | null => {
-  const error = validateJsonSchema(createDepartmentBody,departmentDTO,'example message');
-  return error
+export const validateCreateDepartment = (departmentDTO: CreateDepartmentDTO): HTTPCienciaError | null => {
+  return validateJsonSchema(createDepartmentBody, departmentDTO, 'example message');
 };
