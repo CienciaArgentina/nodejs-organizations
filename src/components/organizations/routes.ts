@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { getById, getOrganizations, createOrganization, patchOrgnization, addUserToOrganization } from './service';
 import { HttpStatusCode } from '../../commons/constants';
 import { Paths } from './utils';
-import { authMiddleware } from 'ciencia-argentina-backend-commons';
+// import { authMiddleware } from 'ciencia-argentina-backend-commons';
 
 export default [
   {
@@ -19,7 +19,6 @@ export default [
     path: Paths.GetById,
     method: 'get',
     handler: [
-      authMiddleware('claim'),
       async ({ params }: Request, res: Response): Promise<void> => {
         //console.log(res.locals.jwt)
         const result = await getById(params.id);
