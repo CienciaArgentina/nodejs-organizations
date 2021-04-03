@@ -1,6 +1,7 @@
-require('dotenv').config();
-module.exports = {
-  cienciaArgDb: {
+import dotenv from 'dotenv'
+dotenv.config();
+
+export const cienciaArgDb = {
     client: 'mysql',
     connection: {
       host: process.env.DB_CIENCIAARG_HOST,
@@ -13,5 +14,5 @@ module.exports = {
       min: process.env.DB_CIENCIAARG_POOL_MIN || 1,
       max: process.env.DB_CIENCIAARG_POOL_MAX || 2,
     },
-  },
-};
+    debug:!!process.env.DB_DEBUG
+  };
