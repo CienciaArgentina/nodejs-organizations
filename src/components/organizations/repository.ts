@@ -1,5 +1,6 @@
 import {Organization,UserOrganization} from '../../models';
 import { Page } from 'objection';
+import { httpClient } from '../../utils/httpClient';
 
 export const findOrganizationsByUser = async (id: string,limit:number,offset:number): Promise<Page<Organization>> => {
   const result = await Organization.query().
@@ -46,6 +47,12 @@ export const addUser = async (organization_id:string,user_id:string): Promise<vo
     organization_id
   });
 
+  const host = process.env.CIENCIA_API_HOST || ''
+  const request = httpClient(host)
+  await request.post("/assign", {
+    "auth_id": user_id,
+    "role_id": process.env.USER_DEFAULT_ROLE || ''
+  });
 };
 
 export const updateOrganization = async (id: string, organization: Organization): Promise<boolean> => {
